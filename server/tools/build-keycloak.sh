@@ -27,6 +27,8 @@ if [ "$GIT_REPO" != "" ]; then
     MAIN_HEAD=`git log -n1 --format="%H"`
     echo "Keycloak from [build]: $GIT_REPO/$GIT_BRANCH/commit/$MAIN_HEAD"
 
+	$M2_HOME/bin/mvn dependency:get -Dartifact=org.jboss.galleon:galleon-maven-plugin:4.2.8.Final
+
     $M2_HOME/bin/mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip -q clean install
     
     cd /opt/jboss
