@@ -13,9 +13,9 @@ if [ "$GIT_REPO" != "" ]; then
     microdnf install -y git
 
     # Install Maven
-    cd /opt/jboss 
-    curl -s https://apache.uib.no/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz | tar xz
-    mv apache-maven-3.5.4 /opt/jboss/maven
+    cd /opt/jboss
+    curl -s https://apache.uib.no/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz | tar xz
+    mv apache-maven-3.6.3 /opt/jboss/maven
     export M2_HOME=/opt/jboss/maven
 
     # Clone repository
@@ -27,7 +27,7 @@ if [ "$GIT_REPO" != "" ]; then
     MAIN_HEAD=`git log -n1 --format="%H"`
     echo "Keycloak from [build]: $GIT_REPO/$GIT_BRANCH/commit/$MAIN_HEAD"
 
-	$M2_HOME/bin/mvn dependency:get -Dartifact=org.jboss.galleon:galleon-maven-plugin:4.2.8.Final
+    $M2_HOME/bin/mvn dependency:get -Dartifact=org.jboss.galleon:galleon-maven-plugin:4.2.8.Final
 
     $M2_HOME/bin/mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip -q clean install
     
